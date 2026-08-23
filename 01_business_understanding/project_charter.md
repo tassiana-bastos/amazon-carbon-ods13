@@ -10,7 +10,27 @@ Quais estados da Amazônia Legal devem ser priorizados para ações de conserva�
 
 ## Meta/KPIs
 
-Ate o final do projeto, integrar pelo menos tres fontes de dados, calcular um indice de prioridade para 100% dos territorios analisados e identificar os tres estados de maior prioridade para conservacao. 
+A meta e entender quais estados merecem maior atencao. Na primeira versao do projeto temos como principais KPIs:
+
+### KPI 1 — Desmatamento total
+
+Área total desmatada no período.
+
+### KPI 2 — Desmatamento médio anual
+
+desmatamento total / número de anos
+
+### KPI 3 — Último valor disponível
+
+Desmatamento no ano mais recente.
+
+### KPI 4 — Variação
+
+Comparar o primeiro e o último ano do período escolhido.
+
+### KPI 5 — Ranking
+
+Ordenar os 9 estados.
 
 ## Publico-alvo
 
