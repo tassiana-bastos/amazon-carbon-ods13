@@ -2,7 +2,9 @@
 
 ## Problema de negocio
 
-Gestores responsaveis por politicas ambientais e climaticas precisam definir quais estados da Amazonia Legal devem receber maior prioridade em acoes de conservacao. O projeto propoe uma aplicacao de apoio a decisao que integre essas informacoes e produza um ranking de prioridade territorial.
+O desmatamento na Amazonia Legal representa um desafio para a conservacao dos ecossistemas e para o enfrentamento das mudancas climaticas.
+
+Este projeto busca utilizar dados de desmatamento para apoiar a identificacao dos estados da Amazonia Legal que apresentam maior necessidade de atencao e monitoramento, contribuindo para uma tomada de decisao orintada por dados.
 
 ## Pergunta de negocio
 
