@@ -25,11 +25,24 @@ Estado × ano
 
 Tipo de dado
 
-Estruturado
+Estruturado - CSV
+
+Utilizacao: analisar area desmatada por UF e ano.
 
 Objetivo no projeto: Analisar a evolucao temporal e a intensidade do desmatamento nos estados da Amazonia Legal, permitindo comparar os territorios e identificar aqueles que devem ser priorizados para acoes de conservacao alinhadas ao ODS 13. 
 
 Fonte/URL de consulta: https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates?utm_source=chatgpt.com
 
 
-- Irrecoverable Carbon Brazil
+### Agencia Brasil
+
+Nao estruturado - HTML/texto
+
+Utilizacao: Contextualizar acontecimentos recentes relacionados a Amazonia, desmatamento e mudancas climaticas.
+
+
+### IBGE
+
+Semi-estruturado - JSON/API
+
+Utilizacao: Dados territoriais/complementares 
