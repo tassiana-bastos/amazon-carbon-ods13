@@ -1,2 +1,4 @@
-Streamlit, version 1.62.0
+streamlit
+requests
+beautifulsoup4
 
