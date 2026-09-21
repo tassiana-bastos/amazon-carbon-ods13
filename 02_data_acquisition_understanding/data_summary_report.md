@@ -1,48 +1,60 @@
 # Data Summary Report
 
-Documento inicial de levantamento das fontes de dados utilizadas no projeto.
+Documento de levantamento e caracterizacao das fontes de dados utilizadas no projeto.
 
-## Fontes
+## Resumo das fontes
 
-### INPE – PRODES, disponibilizado pela plataforma TerraBrasilis
-  Pagina de consulta: TerraBrasilis - Dashboard PRODES - Taxas de Desmatamento - Amazonia Legal.
+| Fonte | Tipo de dado | Objetivo de uso |
+|----------|----------|----------|
+| INPE – PRODES, disponibilizado pela plataforma TerraBrasilis   | Estruturado — CSV; granularidade Estado × ano; unidade km²; período 1988–2025   | Analisar a evolução temporal e a intensidade do desmatamento nos estados da Amazônia Legal e permitir comparações entre os territórios.   |
+| Agência Brasil   | Não estruturado — HTML/texto, processado e armazenado em CSV   | Contextualizar acontecimentos recentes relacionados à Amazônia, desmatamento e mudanças climáticas; alimentar a seção de notícias, estatísticas básicas e nuvem de palavras.   |
+| Arquivo CSV enviado pelo usuário   | Estruturado — CSV   | Complementar as informações de notícias já apresentadas na aplicação. Os registros enviados são identificados pela procedência “enviada”.   |
+
+
+### 1. INPE – PRODES / TerraBrasilis
+
+**Pagina de consulta:** TerraBrasilis — Dashboard PRODES — Taxas de Desmatamento — Amazônia Legal.
   
-  Consulta utilizada: Taxas de desmatamento - Amazonia Legal - Estados - serie historica ompleta - exportacao/CSV.
+**Consulta utilizada:** Taxas de desmatamento — Amazônia Legal — Estados — série histórica completa — exportação/CSV.
 
-  Dados extraidos: year, area km², uf
+**Campos extraidos:** year, area km², uf.
 
-  Período
+**Período:** 1988–2025.
 
-1988–2025
+**Unidade:** km².
 
-Unidade
+**Granularidade:** Estado x ano.
 
-km²
+**Formato:** CSV.
 
-Granularidade
+**Utilizacao:** o conjunto constitui a base principal da análise quantitativa da aplicação, sendo utilizado nos indicadores, filtros e comparações entre os estados.
 
-Estado × ano
+**Fonte/URL de consulta:** https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates
 
-Tipo de dado
+### 2. Agência Brasil
 
-Estruturado - CSV
+A Agência Brasil foi utilizada como fonte de conteúdo web para a etapa de web scraping.
 
-Utilizacao: analisar area desmatada por UF e ano.
+O conteúdo das páginas foi coletado separadamente do código da aplicação utilizando requests e BeautifulSoup. Antes da coleta, foi verificado o robots.txt da fonte. O conteúdo processado foi armazenado em data/processed/agencia_brasil_meio_ambiente.csv.
 
-Objetivo no projeto: Analisar a evolucao temporal e a intensidade do desmatamento nos estados da Amazonia Legal, permitindo comparar os territorios e identificar aqueles que devem ser priorizados para acoes de conservacao alinhadas ao ODS 13. 
+**Campos armazenados:** titulo, data_publicacao, texto, url.
 
-Fonte/URL de consulta: https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates?utm_source=chatgpt.com
+**Tipo:** não estruturado — HTML/texto, posteriormente estruturado em CSV.
+
+**Utilização:** complementar a análise quantitativa com informações contextuais recentes e alimentar a tabela de notícias, estatísticas básicas e nuvem de palavras da aplicação.
+
+### 3. Arquivos CSV enviados pelo usuário
+
+A aplicação permite o envio de arquivos CSV para complementar os dados de notícias existentes.
+
+Os registros enviados são incorporados ao estado de sessão da aplicação e recebem a identificação de procedência enviada, enquanto os registros obtidos pela coleta web são identificados como coletada.
+
+O download disponibilizado pela aplicação corresponde ao recorte atualmente exibido após a aplicação dos filtros.
+
+### Procedencia e Organizacao
+
+Os dados coletados da web e os dados utilizados pela aplicação são mantidos em etapas separadas. A coleta é executada por código próprio, enquanto a aplicação Streamlit utiliza os arquivos processados armazenados no diretório data/.
+
+Essa separação permite reproduzir a coleta sem depender da execução do scraping a cada abertura da aplicação.
 
 
-### Agencia Brasil
-
-Nao estruturado - HTML/texto
-
-Utilizacao: Contextualizar acontecimentos recentes relacionados a Amazonia, desmatamento e mudancas climaticas.
-
-
-### IBGE
-
-Semi-estruturado - JSON/API
-
-Utilizacao: Dados territoriais/complementares 
