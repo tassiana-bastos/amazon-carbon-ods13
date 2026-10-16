@@ -17,25 +17,7 @@ Quais estados da Amazônia Legal devem ser priorizados para ações de conserva�
 
 ## Objetivo geral
 
-Desenvolver uma aplicacao interativa em Streamlit que permita explorar a evolucao do desmatamento na Amazonia Legal por estado e ano e complementar essa analise com noticias recentes relacionadas ao meio ambiente, utilizando dados estruturados e conteudo obtido na web.
-
-## Objetivos específicos
-
-- Analisar a evolução temporal do desmatamento por estado.
-
-- Comparar a intensidade do desmatamento entre os estados da Amazônia Legal.
-
-- Disponibilizar indicadores e filtros para exploração dos dados.
-
-- Coletar, processar e apresentar notícias relacionadas à Amazônia, desmatamento e mudanças climáticas.
-
-- Apresentar estatísticas básicas e uma nuvem de palavras a partir das notícias coletadas.
-
-- Permitir que o usuário complemente as informações por meio de upload de arquivos CSV.
-
-- Permitir o download do recorte de dados atualmente exibido na aplicação.
-
-- Utilizar cache e estado de sessão no Streamlit para melhorar o desempenho e preservar dados durante as interações.
+Desenvolver uma aplicacao exploratoria data-driven que permita explorar a evolucao do desmatamento na Amazonia Legal por estado e ano e complementar essa analise com noticias recentes relacionadas ao meio ambiente atraves da comparacao, exportacao e reutilizacao dos dados por pessoas e programas. 
 
 ## Escopo
 
