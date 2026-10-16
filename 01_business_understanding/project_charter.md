@@ -1,5 +1,10 @@
 # Project Charter
 
+**Projeto:** Amazonia Legal | ODS 13 — análise descritiva do desmatamento e contexto ambiental
+
+**Repositorio:** https://github.com/tassiana-bastos/amazon-carbon-ods13
+
+
 ## Problema de negocio
 
 O desmatamento na Amazonia Legal representa um desafio para a conservacao dos ecossistemas e para o enfrentamento das mudancas climaticas.
