@@ -1,4 +1,9 @@
 .venv/
+venv/
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
+.env
 .streamlit/secrets.toml
+data/processed/observacoes.jsonl
+data/raw/*.html
