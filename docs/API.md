@@ -20,7 +20,4 @@ Exemplo:
 ```json
 {"titulo":"Observação de teste","texto":"Informação ambiental para testar a API.","fonte":"https://example.org/"}
 ```
-Campos inválidos resultam em HTTP 422. A API acadêmica não possui autenticação; não publicar com escrita aberta em produção.
-
-## Integração Streamlit
-Inicie API num terminal e `streamlit run app.py` em outro. A página **API e contribuições** consome GET e POST. Para uma API hospedada separadamente, configure `API_BASE_URL`. `localhost` só funciona quando ambos os processos compartilham ambiente de rede.
+Campos inválidos resultam em HTTP 422.
