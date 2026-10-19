@@ -1,12 +1,7 @@
 """
 Coleta pontual de notícias da Agência Brasil usando Requests e Beautiful Soup.
 
-Boas práticas:
-- consultar robots.txt antes de aceder aos artigos;
-- respeitar Crawl-delay;
-- não contornar bloqueios;
-- guardar HTML bruto em data/raw/ e CSV processado em data/processed/;
-- executar este script manualmente, nunca em cada rerun do Streamlit.
+
 """
 import csv
 import time
