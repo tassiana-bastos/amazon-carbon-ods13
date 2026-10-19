@@ -84,27 +84,21 @@ Desenvolver uma aplicacao exploratoria data-driven que permita explorar a evoluc
 - Definição automática de políticas públicas ou decisões de conservação.
 
 
-## Meta/KPIs
+## KPIs descritivos
 
-### KPI 1 — Desmatamento total
+1. Série temporal por estado e intervalo de anos.  
 
-Área total desmatada no período selecionado.
+2. Soma dos valores por estado no recorte, identificada como agregado comparativo.  
 
-### KPI 2 — Desmatamento médio anual
+3. Valor do ano mais recente por estado.  
 
-Desmatamento total dividido pelo número de anos considerados.
+4. Variação entre primeiro e último ano, tratando ausências/zeros.  
 
-### KPI 3 — Último valor disponível
+5. Quantidade de registros, estados e anos disponíveis.  
 
-Área desmatada no ano mais recente disponível no período selecionado.
+6. Quantidade de notícias e frequência de palavras. 
 
-### KPI 4 — Variação
-
-Comparação entre o primeiro e o último ano do período selecionado.
-
-### KPI 5 — Ordenação dos estados
-
-Ordenação dos nove estados da Amazônia Legal segundo os indicadores apresentados, permitindo a comparação entre os territórios.
+ 7. Disponibilidade/validade das rotas GET e POST 
 
 
 ## Stakeholders
