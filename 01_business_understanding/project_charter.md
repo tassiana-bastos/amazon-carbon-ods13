@@ -19,13 +19,37 @@ Quais estados da Amazônia Legal devem ser priorizados para ações de conserva�
 
 Desenvolver uma aplicacao exploratoria data-driven que permita explorar a evolucao do desmatamento na Amazonia Legal por estado e ano e complementar essa analise com noticias recentes relacionadas ao meio ambiente atraves da comparacao, exportacao e reutilizacao dos dados por pessoas e programas. 
 
+## Objetivos específicos
+
+- Analisar a evolução temporal do desmatamento por estado.  
+
+- Comparar a intensidade do desmatamento entre os estados da Amazônia Legal.  
+
+- Disponibilizar indicadores e filtros para exploração dos dados.  
+
+- Coletar, processar e apresentar notícias relacionadas à Amazônia, desmatamento e mudanças climáticas.  
+
+- Apresentar estatísticas básicas e uma nuvem de palavras a partir das notícias.  
+
+- Permitir upload de CSV para complementar as informações.  
+
+- Permitir download do recorte atualmente exibido.  
+
+- Utilizar cache e estado de sessão no Streamlit 
+
 ## Escopo
 
 ### Incluido no projeto
 
 - Dados históricos de taxas de desmatamento da Amazônia Legal por estado e ano.
+  
+- Streamlit multipáginas com st.navigation/st.Page.
+  
+- API FastAPI com GET e POST, validação e documentação OpenAPI.
 
 - Período disponível no conjunto principal: 1988–2025.
+  
+- Integração do cliente Streamlit com a API. 
 
 - Indicadores de desmatamento total, média anual, último valor disponível, variação entre primeiro e último ano e ordenação dos estados.
 
@@ -44,6 +68,10 @@ Desenvolver uma aplicacao exploratoria data-driven que permita explorar a evoluc
 - Cache de dados e estado de sessão.
 
 - Documentação do projeto e versionamento no GitHub.
+  
+- Decisão de Selenium fundamentada.
+  
+- Planejamento de Q&A com LLMs.
 
 ### Fora do escopo
 
