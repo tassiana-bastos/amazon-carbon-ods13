@@ -37,6 +37,15 @@ A Agência Brasil foi utilizada como fonte de conteúdo web para a etapa de web 
 
 O conteúdo das páginas foi coletado separadamente do código da aplicação utilizando requests e BeautifulSoup. Antes da coleta, foi verificado o robots.txt da fonte. O conteúdo processado foi armazenado em data/processed/agencia_brasil_meio_ambiente.csv.
 
+Paginas utilizadas como fonte de informacao e conteudo:
+
+    "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-09/devastacao-na-amazonia-pode-quebrar-maior-maquina-de-chuva-do-mundo",
+    "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-08/imazon-aponta-desmatamento-zero-em-60-de-terras-indigenas-na-amazonia",
+    "https://agenciabrasil.ebc.com.br/geral/noticia/2016-05/amazonia-ameacada-guardioes-lutam-para-manter-floresta-em-pe",
+    "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-09/competitividade-do-mercado-de-carbono-moderniza-conservacao-florestal",
+    "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-10/incendios-avancam-sobre-o-oeste-do-para-e-deixam-ar-insalubre",
+
+
 **Campos armazenados:** titulo, data_publicacao, texto, url.
 
 **Tipo:** não estruturado — HTML/texto, posteriormente estruturado em CSV.
