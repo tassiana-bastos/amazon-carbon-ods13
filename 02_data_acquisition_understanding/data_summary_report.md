@@ -9,6 +9,7 @@ Documento de levantamento e caracterizacao das fontes de dados utilizadas no pro
 | INPE – PRODES, disponibilizado pela plataforma TerraBrasilis   | Estruturado — CSV; granularidade Estado × ano; unidade km²; período 1988–2025   | Analisar a evolução temporal e a intensidade do desmatamento nos estados da Amazônia Legal e permitir comparações entre os territórios.   |
 | Agência Brasil   | Não estruturado — HTML/texto, processado e armazenado em CSV   | Contextualizar acontecimentos recentes relacionados à Amazônia, desmatamento e mudanças climáticas; alimentar a seção de notícias, estatísticas básicas e nuvem de palavras.   |
 | Arquivo CSV enviado pelo usuário   | Estruturado — CSV   | Complementar as informações de notícias já apresentadas na aplicação. Os registros enviados são identificados pela procedência “enviada”.   |
+| API própria com FastAPI   | Estruturado — JSON, disponibilizado por endpoints HTTP (GET)   | Expor os dados do projeto para consumo por outros sistemas, permitindo consultar os dados PRODES por UF e período, obter indicadores agregados e ranking por estado e registrar observações.   |
 
 
 ### 1. INPE – PRODES / TerraBrasilis
