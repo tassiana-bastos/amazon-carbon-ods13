@@ -51,6 +51,17 @@ Os registros enviados são incorporados ao estado de sessão da aplicação e re
 
 O download disponibilizado pela aplicação corresponde ao recorte atualmente exibido após a aplicação dos filtros.
 
+## 4. API com FastAPI
+
+A aplicação implementa uma API utilizando FastAPI, com os seguintes recursos:
+
+| Método | Endpoint | Funcionalidade |
+|----------|----------|----------|
+| GET   | /   | Verifica o status da API   |
+| GET   | /desmatamento   | Consulta dados PRODES com filtros por UF e período   |
+| GET   | /resumo   | Retorna indicadores agregados e ranking por estado   |
+| GET   | /observacoes   | Registra observações em arquivo JSONL   |
+
 ### Procedencia e Organizacao
 
 Os dados coletados da web e os dados utilizados pela aplicação são mantidos em etapas separadas. A coleta é executada por código próprio, enquanto a aplicação Streamlit utiliza os arquivos processados armazenados no diretório data/.
