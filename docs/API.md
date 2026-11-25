@@ -1,23 +1,31 @@
-# API FastAPI — guia de utilização
+# API FastAPI — guia de utilização (TP5)
 
 ## Executar
-Na raiz: `pip install -r requirements-api.txt` e `uvicorn api.main:app --reload`.
+Na raiz: `pip install -r requirements.txt`, configurar `.env` a partir de `.env.example` e iniciar com `uvicorn api.main:app`.
 Documentação interativa: `http://127.0.0.1:8000/docs`; alternativa: `/redoc`.
 
-## `GET /desmatamento`
-Consulta dados PRODES/TerraBrasilis em JSON. Parâmetros opcionais: `uf`, `ano_inicio`, `ano_fim`, `limite` (1–20.000).
-Exemplos:
-- `http://127.0.0.1:8000/desmatamento?uf=Pará&ano_inicio=2015&ano_fim=2020`
-- `http://127.0.0.1:8000/desmatamento?limite=10`
-Resposta contém `total`, filtros e `dados` (`year`, `area_km2`, `uf`).
+## Saúde
+`GET /saude` informa se a chave OpenRouter está configurada, o provedor e o model id selecionado. A chave nunca é retornada.
 
-## `GET /resumo`
-Retorna número de registros, estados, intervalo temporal e ranking agregado descritivo por estado.
+## Dados PRODES
+- `GET /desmatamento`: parâmetros opcionais `uf`, `ano_inicio`, `ano_fim`, `limite` (1–20.000). Retorna `year`, `area_km2`, `uf`.
+- `GET /resumo`: número de registros, UFs, intervalo temporal e ranking agregado descritivo.
 
-## `POST /observacoes`
-Recebe JSON com `titulo` (3–120 caracteres), `texto` (5–2.000) e `fonte` opcional (até 500). Devolve HTTP 201 e grava uma linha em `data/processed/observacoes.jsonl`.
-Exemplo:
-```json
-{"titulo":"Observação de teste","texto":"Informação ambiental para testar a API.","fonte":"https://example.org/"}
-```
-Campos inválidos resultam em HTTP 422.
+## Observações
+`POST /observacoes` recebe `titulo` (3–120 caracteres), `texto` (5–2.000) e `fonte` opcional (até 500). Retorna HTTP 201 e grava em `data/processed/observacoes.jsonl`. Entradas não são consideradas dados oficiais.
+
+## Memória conversacional
+- `POST /conversas` — cria conversa e retorna UUID4.
+- `GET /conversas/{id}` — recupera histórico e notas de estados.
+- `POST /conversas/{id}/mensagens` — recebe `{"mensagem":"..."}`, calcula fatos, recupera notícias e chama OpenRouter.
+- `DELETE /conversas/{id}` — apaga o arquivo da conversa (HTTP 204).
+
+IDs inválidos retornam 422; conversas inexistentes retornam 404. As mensagens são persistidas em `data/conversas/`, diretório excluído do Git.
+
+## Compatibilidade TP4
+`POST /processar_texto` foi mantida, mas agora utiliza o provedor remoto configurado. Não carrega modelo local.
+
+## Erros do provedor
+- 503: chave ausente/inválida ou rate limit.
+- 502: erro de comunicação, erro HTTP do provedor ou resposta vazia/inválida.
+- 504: timeout.

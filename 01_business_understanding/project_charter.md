@@ -1,279 +1,155 @@
-# Project Charter
+# Project Charter — Amazônia Legal | ODS 13
 
-**Projeto:** Amazonia Legal | ODS 13 — análise descritiva do desmatamento e contexto ambiental
+**Repositório:** https://github.com/tassiana-bastos/amazon-carbon-ods13
+**Natureza do projeto:** aplicação exploratória de Ciência de Dados, com dashboard, processamento de dados ambientais, coleta de notícias, API e interação conversacional com LLM.
+**Documento:** visão integrada do projeto e de sua evolução, incluindo as funcionalidades desenvolvidas até o TP5.
 
-**Repositorio:** https://github.com/tassiana-bastos/amazon-carbon-ods13
+## 1. Contexto e problema de negócio
 
+O desmatamento na Amazônia Legal é um fenômeno ambiental relevante para a conservação dos ecossistemas e para a discussão sobre mudanças climáticas. A análise exige consultar dados quantitativos organizados por território e ano e, quando disponível, informações textuais que ajudem a contextualizar acontecimentos relacionados ao tema.
 
-## Problema de negocio
+O projeto reúne essas fontes em uma aplicação exploratória para permitir que estudantes, pesquisadores, analistas e demais usuários consultem indicadores, comparem registros por Unidade Federativa (UF), explorem notícias ambientais e interajam com os dados por meio de uma interface conversacional.
 
-O desmatamento na Amazonia Legal representa um desafio para a conservacao dos ecossistemas e para o enfrentamento das mudancas climaticas.
+A aplicação oferece apoio à exploração e interpretação das informações disponíveis. Não substitui estudos especializados, bases oficiais completas ou processos de decisão de políticas públicas.
 
-Este projeto busca utilizar dados de desmatamento para apoiar a identificacao dos estados da Amazonia Legal que apresentam maior necessidade de atencao e monitoramento, contribuindo para uma tomada de decisao orintada por dados.
+## 2. Pergunta orientadora
 
-## Pergunta de negocio
+Como os registros históricos de desmatamento disponíveis para a Amazônia Legal se distribuem entre as Unidades Federativas e ao longo dos anos, e como notícias ambientais coletadas podem complementar a exploração desses dados?
 
-Quais estados da Amazônia Legal devem ser priorizados para ações de conservação considerando a evolução e a intensidade do desmatamento?
+## 3. Objetivo geral
 
-## Objetivo geral
+Desenvolver e manter uma aplicação multipágina que integre dados estruturados de desmatamento, notícias ambientais coletadas, visualizações, recursos de ingestão e exportação, uma API e uma interface de perguntas e respostas com memória conversacional, mantendo rastreabilidade das fontes e explicitando as limitações dos dados.
 
-Desenvolver uma aplicacao exploratoria data-driven que permita explorar a evolucao do desmatamento na Amazonia Legal por estado e ano e complementar essa analise com noticias recentes relacionadas ao meio ambiente atraves da comparacao, exportacao e reutilizacao dos dados por pessoas e programas. 
+## 4. Objetivos específicos
 
-## Objetivos específicos
+- Organizar e explorar a série histórica do PRODES/TerraBrasilis por UF e ano.
+- Apresentar indicadores descritivos, filtros, tabelas e gráficos para apoiar comparações territoriais e temporais.
+- Coletar e processar notícias da Agência Brasil relacionadas ao meio ambiente e à Amazônia.
+- Apresentar notícias, estatísticas textuais e nuvem de palavras a partir do conteúdo processado.
+- Permitir o envio de arquivos CSV para complementar a exploração de notícias e o download dos dados exibidos, conforme os recursos implementados na aplicação.
+- Utilizar cache e estado de sessão no Streamlit para apoiar a interação com os dados.
+- Disponibilizar uma API FastAPI para consulta dos dados, apresentação de resumo, registro de observações e interação conversacional.
+- Integrar um LLM remoto por meio do OpenRouter para responder a perguntas em linguagem natural com contexto dos dados disponíveis.
+- Manter o histórico de cada conversa, permitindo perguntas de acompanhamento e retomada da conversa.
+- Documentar fontes, decisões técnicas, limitações, segurança e procedimentos de execução.
 
-- Analisar a evolução temporal do desmatamento por estado.  
+## 5. Público-alvo e stakeholders
 
-- Comparar a intensidade do desmatamento entre os estados da Amazônia Legal.  
+- Estudantes e pesquisadores interessados em dados ambientais e no uso de IA aplicada.
+- Analistas ambientais e de sustentabilidade que desejem explorar os registros disponíveis.
+- Gestores e equipes de conservação que possam utilizar os indicadores como apoio exploratório, sem tratar a aplicação como instrumento automático de decisão.
+- Usuários da aplicação que consultem notícias, enviem arquivos ou utilizem a interface conversacional.
+- Desenvolvedores e consumidores técnicos interessados na API.
 
-- Disponibilizar indicadores e filtros para exploração dos dados.  
+## 6. Escopo do projeto
 
-- Coletar, processar e apresentar notícias relacionadas à Amazônia, desmatamento e mudanças climáticas.  
+### 6.1 Funcionalidades implementadas e documentadas
 
-- Apresentar estatísticas básicas e uma nuvem de palavras a partir das notícias.  
+**Dashboard Streamlit**
+- Aplicação multipágina com áreas de visão geral, indicadores de desmatamento, notícias e contexto, dados/arquivos, integração com API e memória conversacional.
+- Apresentação de indicadores descritivos, filtros, tabelas e visualizações relativos aos dados disponíveis.
+- Página de notícias com exploração do conteúdo processado, estatísticas textuais e nuvem de palavras.
+- Recursos de upload e download de CSV na área de dados, observadas as validações e limitações da implementação.
+- Uso de cache e estado de sessão nas funcionalidades que deles necessitam.
 
-- Permitir upload de CSV para complementar as informações.  
+**Dados e coleta**
+- Utilização de uma série histórica PRODES/TerraBrasilis fornecida em CSV, com campos `year`, `area km²` e `uf`.
+- Coleta separada de páginas HTML da Agência Brasil com Requests e BeautifulSoup, seguida de armazenamento dos conteúdos processados em CSV.
+- Separação entre arquivos de origem, dados processados e execução da aplicação.
 
-- Permitir download do recorte atualmente exibido.  
+**API**
+- API construída com FastAPI, com documentação OpenAPI.
+- Rotas de saúde, consulta de desmatamento, resumo agregado, registro de observações e recursos de conversa.
+- Validação dos dados de entrada e respostas HTTP para erros de validação, recursos inexistentes ou indisponibilidade do provedor, conforme os contratos implementados.
+- A rota legada `/processar_texto` é mantida na implementação TP5 para compatibilidade, utilizando o provedor remoto, e não um modelo carregado localmente.
 
-- Utilizar cache e estado de sessão no Streamlit 
+**Memória conversacional com LLM — TP5, Opção 1**
+- Integração com LLM remoto por meio da API OpenRouter; o projeto não precisa carregar os pesos de um modelo local para essa funcionalidade.
+- Identificação independente de conversas por UUID.
+- Persistência do histórico de cada conversa em arquivo JSON separado.
+- Extração por Python de notas simples sobre entidades/UFs mencionadas no histórico.
+- Envio de uma janela recente de mensagens, das notas e dos fatos calculados a partir do PRODES ao modelo.
+- Recuperação lexical de notícias da Agência Brasil para fornecer contexto e referências quando houver correspondência.
+- Possibilidade de restaurar e apagar uma conversa.
+- Configuração da chave por variável de ambiente/arquivo `.env`, sem versionar o segredo.
 
-## Escopo
+### 6.2 Evolução histórica
 
-### Incluido no projeto
+O projeto foi desenvolvido incrementalmente. As etapas anteriores estabeleceram a compreensão do problema, a organização das fontes, a aplicação Streamlit, a coleta e apresentação de notícias e a API. A etapa TP4 documentou e experimentou uma abordagem de classificação textual com modelo local Qwen. Na evolução para o TP5, a implementação conversacional foi direcionada à Opção 1, com LLM remoto via OpenRouter, para evitar a necessidade de carregar pesos de modelo no ambiente de execução.
 
-- Dados históricos de taxas de desmatamento da Amazônia Legal por estado e ano.
-  
-- Streamlit multipáginas com st.navigation/st.Page.
-  
-- API FastAPI com GET e POST, validação e documentação OpenAPI.
+A documentação e os arquivos históricos das etapas anteriores podem ser mantidos no repositório como registro do processo. A abordagem local do TP4 não deve ser descrita como mecanismo ativo da memória conversacional TP5.
 
-- Período disponível no conjunto principal: 1988–2025.
-  
-- Integração do cliente Streamlit com a API. 
+### 6.3 Fora do escopo / não alegado como funcionalidade entregue
 
-- Indicadores de desmatamento total, média anual, último valor disponível, variação entre primeiro e último ano e ordenação dos estados.
+- Previsão de desmatamento ou modelos preditivos de risco ambiental.
+- Estimativa direta de carbono irrecuperável ou emissões de gases de efeito estufa a partir do CSV atual.
+- Inferência causal entre notícias, variações de desmatamento e impactos sociais.
+- Avaliação quantitativa da situação de povos indígenas, conflitos territoriais ou serviços essenciais, pois esses indicadores não integram as fontes quantitativas descritas neste documento.
+- Sistema RAG semântico baseado em embeddings ou busca vetorial: a recuperação de notícias descrita na versão TP5 é lexical.
+- Tomada automática de decisão ou recomendação oficial de políticas públicas.
+- Garantia de disponibilidade contínua do modelo gratuito ou de limites de uso do provedor externo.
 
-- Filtros interativos por estado e período.
+## 7. Fontes de dados e método em alto nível
 
-- Coleta separada de conteúdo de páginas da Agência Brasil utilizando BeautifulSoup.
+1. **INPE/PRODES via TerraBrasilis:** série estruturada em CSV, com registros por UF e ano, utilizada para indicadores e fatos numéricos.
+2. **Agência Brasil/EBC:** páginas HTML coletadas e processadas em CSV, utilizadas na seção de notícias e na recuperação lexical de contexto.
+3. **CSV enviado pelo usuário:** entrada complementar para a exploração de notícias, sujeita à validação implementada na aplicação.
+4. **Observações enviadas à API:** contribuições armazenadas separadamente em JSONL; não são tratadas automaticamente como dados oficiais.
+5. **Histórico conversacional:** mensagens armazenadas por conversa em JSON, utilizadas para manter contexto entre turnos.
 
-- Armazenamento dos dados coletados em CSV nos diretórios de dados do projeto.
+Os detalhes de campos, período, preparação, qualidade e limitações estão descritos no documento Data Summary Report.
 
-- Exibição de notícias, estatísticas básicas e nuvem de palavras.
+## 8. Indicadores de acompanhamento do projeto
 
-- Upload de CSV pelo usuário e identificação da procedência dos registros como “coletada” ou “enviada”.
+Os indicadores descritivos utilizados na aplicação incluem, conforme o recorte e a disponibilidade dos dados:
 
-- Download do recorte atualmente filtrado.
+- Quantidade de registros, UFs e anos presentes na base.
+- Valores de desmatamento por UF e ano.
+- Comparações entre UFs e períodos.
+- Valor mais recente disponível por UF.
+- Variação entre anos selecionados quando há registros comparáveis.
+- Quantidade de notícias processadas e estatísticas textuais.
+- Disponibilidade das rotas da API e dos recursos conversacionais.
+- Quantidade de mensagens/histórico por conversa, quando exibida pela interface.
 
-- Cache de dados e estado de sessão.
+As somas de valores anuais devem ser identificadas como agregações comparativas da série, não como uma área geográfica única acumulada. A interpretação depende da definição do indicador e da cobertura dos registros.
 
-- Documentação do projeto e versionamento no GitHub.
-  
-- Análise da necessidade de Selenium para páginas dinâmicas, com justificativa técnica da ferramenta de coleta selecionada.
-  
-- Planejamento de Q&A com LLMs.
+## 9. Arquitetura e decisões técnicas
 
-### Fora do escopo
+- **Interface:** Streamlit multipágina.
+- **Serviço de API:** FastAPI.
+- **Dados estruturados:** CSV e processamento com Python.
+- **Coleta web:** Requests e BeautifulSoup para as páginas HTML selecionadas da Agência Brasil.
+- **LLM:** provedor remoto acessado pelo OpenRouter; o identificador do modelo é configurável por variável de ambiente.
+- **Memória:** arquivos JSON por UUID, notas extraídas por Python e janela recente de mensagens.
+- **Recuperação de notícias:** correspondência lexical simples; não equivale a recuperação semântica completa.
+- **Persistência de observações:** arquivo JSONL separado.
+- **Versionamento:** Git e GitHub.
 
-- Previsão futura de desmatamento.
+A escolha por exportação CSV para a série PRODES evita automatizar a navegação do painel quando o arquivo estruturado já atende à necessidade. Para as páginas da Agência Brasil selecionadas, Requests e BeautifulSoup foram utilizados. Selenium foi avaliado, mas não é necessário para as fontes e o fluxo descritos nesta versão.
 
-- Modelos preditivos de risco ambiental.
+## 10. Segurança, privacidade e riscos
 
-- Estimativa direta de emissões de GEE.
+- A chave OpenRouter deve permanecer em `.env` ou em variável de ambiente do servidor e nunca ser adicionada ao Git.
+- O diretório `data/conversas/` contém histórico fornecido por usuários e deve permanecer fora do versionamento.
+- Observações e conversas não devem ser tratadas como fontes oficiais verificadas.
+- Como o LLM é acessado por um provedor externo, o conteúdo enviado no contexto da requisição é processado por terceiro. Não inserir informações pessoais ou sensíveis.
+- O modelo pode produzir respostas incorretas; números devem ser calculados em Python e respostas devem ser verificadas.
+- A recuperação lexical pode não encontrar notícias relevantes quando a pergunta utiliza sinônimos ou termos diferentes.
+- Antes de disponibilizar a API publicamente para uso amplo, devem ser avaliados autenticação, limitação de requisições, política de retenção e controles de acesso.
 
-- Definição automática de políticas públicas ou decisões de conservação.
+## 11. Critérios de sucesso
 
-## Decisão técnica: Web Scraping com Selenium
+- O dashboard permite navegar pelas funcionalidades implementadas sem eliminar as páginas anteriores.
+- Os indicadores quantitativos são derivados dos dados processados, e não inventados pelo LLM.
+- As notícias preservam título, data e URL para rastreabilidade.
+- A API expõe contratos documentados e valida as entradas.
+- A conversa mantém contexto entre mensagens e permite recuperar/apagar uma conversa.
+- A integração com o provedor utiliza segredo fora do código e do Git.
+- A documentação descreve o estado real da aplicação, suas fontes e limitações.
 
-### Contexto e diagnóstico
+## 12. Reprodutibilidade
 
-Durante a análise das fontes de dados do projeto, foi investigada a utilização de Selenium para a extração de informações do painel PRODES, disponibilizado pelo TerraBrasilis/INPE.
+Os procedimentos de instalação, configuração das variáveis de ambiente, inicialização do FastAPI e do Streamlit e execução dos testes devem ser mantidos atualizados no README e na documentação técnica do repositório.
 
-A investigação identificou que a página do TerraBrasilis utiliza JavaScript para carregar e renderizar os dados. Em um primeiro teste, a biblioteca Requests retornou o HTML inicial da página, mas não encontrou a tabela com os registros esperados.
-
-Esse comportamento caracteriza uma página dinâmica: parte do conteúdo é disponibilizada posteriormente, após a execução de JavaScript no navegador.
-
-### Alternativas avaliadas
-
-Foram consideradas três possibilidades de extração:
-
-1. **Requests + BeautifulSoup:** adequada para páginas cujo conteúdo já está disponível no HTML recebido pelo servidor.
-2. **Requests + consumo de arquivos JSON:** alternativa para situações em que a aba Network do navegador permite identificar requisições que disponibilizam os dados em formato estruturado.
-3. **Selenium:** ferramenta para automatizar um navegador e acessar elementos que aparecem somente após a execução de JavaScript.
-
-### Decisão técnica
-
-Embora o Selenium tenha sido estudado e avaliado para a extração de páginas dinâmicas, sua utilização não foi considerada necessária para as fontes selecionadas na versão atual do projeto.
-
-A série histórica do PRODES utilizada na aplicação é obtida por meio da exportação CSV do painel TerraBrasilis, evitando a necessidade de automatizar a navegação e a extração da tabela pelo navegador.
-
-Para as notícias da Agência Brasil, o conteúdo é disponibilizado em HTML estático, permitindo a coleta com Requests e BeautifulSoup.
-
-Portanto, a decisão foi priorizar ferramentas mais simples e adequadas à natureza de cada fonte, evitando a introdução de dependências e complexidade desnecessárias.
-
-### Arquitetura de coleta
-
-A coleta é executada separadamente da aplicação Streamlit. Os dados são processados e armazenados em arquivos CSV nos diretórios de dados do projeto. A aplicação consome os arquivos já preparados, evitando executar processos de scraping a cada acesso do usuário.
-
-O Selenium permanece como alternativa técnica para futuras fontes que apresentem conteúdo carregado dinamicamente e que não disponibilizem uma API, arquivo estruturado ou requisição JSON acessível de forma mais simples.
-
-### Critérios de utilização futura
-
-A adoção do Selenium será considerada quando:
-
-- O conteúdo necessário não estiver presente no HTML inicial.
-- Não houver API ou requisição JSON acessível que permita obter os dados diretamente.
-- Não existir uma opção de exportação estruturada adequada.
-- A utilização da ferramenta respeitar as permissões, os termos de uso e as políticas de acesso da fonte.
-
-Quando utilizado, o processo deverá empregar esperas explícitas por condições de carregamento dos elementos, tratamento de erros, fechamento do navegador e armazenamento dos resultados em CSV ou TXT fora da aplicação.
-
-A decisão segue o princípio de utilizar a solução tecnicamente mais simples que atenda aos requisitos de coleta.
-
-
-## Plano de Perguntas e Respostas (Q&A) com LLMs
-
-### Objetivo
-
-Planejar a implementação de uma funcionalidade de perguntas e respostas em linguagem natural, utilizando Large Language Models (LLMs), para facilitar a consulta e interpretação dos dados históricos de desmatamento da Amazônia Legal e das notícias relacionadas ao meio ambiente.
-
-A proposta é permitir que analistas ambientais, pesquisadores e gestores consultem informações do projeto por meio de perguntas, recebendo respostas contextualizadas, acompanhadas de evidências e referências às fontes utilizadas.
-
-### Fontes de conhecimento
-
-A funcionalidade deverá utilizar duas fontes principais:
-
-**1. Série histórica do PRODES — INPE/TerraBrasilis**
-
-- Tipo: dados estruturados.
-- Formato: CSV.
-- Granularidade: unidade federativa e ano.
-- Período disponível: 1988–2025.
-- Campos principais:
-  - `year`: ano de referência.
-  - `area km²`: área desmatada em quilômetros quadrados.
-  - `uf`: unidade federativa.
-
-Finalidade: responder perguntas quantitativas e comparativas sobre a evolução do desmatamento, diferenças entre estados, períodos de maior intensidade e indicadores históricos.
-
-**2. Notícias da Agência Brasil — EBC**
-
-- Tipo: dados não estruturados, predominantemente textuais.
-- Formato de origem: HTML.
-- Formato processado: CSV.
-- Campos principais:
-  - `titulo`: título da notícia.
-  - `data_publicacao`: data de publicação.
-  - `texto`: conteúdo textual da matéria.
-  - `url`: endereço original da publicação.
-
-Finalidade: fornecer contexto jornalístico atualizado sobre acontecimentos relacionados à Amazônia, desmatamento, conservação ambiental e mudanças climáticas.
-
-Os dados coletados serão armazenados em `data/processed/agencia_brasil_meio_ambiente.csv`, separados da execução da aplicação.
-
-### Estratégia de implementação
-
-A arquitetura proposta combinará processamento convencional de dados com recuperação de informações e geração de respostas por LLM.
-
-**1. Preparação dos dados**
-
-- Limpeza e padronização da série histórica do PRODES.
-- Tratamento de valores ausentes e inconsistências.
-- Preparação dos textos das notícias.
-- Preservação de títulos, datas, URLs e identificação das fontes.
-- Organização dos dados para consulta e recuperação de informações.
-
-**2. Recuperação de informações**
-
-Será considerada uma abordagem baseada em RAG (Retrieval-Augmented Generation), na qual o modelo recebe informações recuperadas das fontes do projeto antes de elaborar uma resposta.
-
-Para as notícias, poderão ser utilizados mecanismos de busca textual ou embeddings para localizar matérias relacionadas à pergunta.
-
-Para a série histórica do PRODES, as consultas quantitativas deverão utilizar filtros, agregações e cálculos executados por código, garantindo maior precisão numérica.
-
-**3. Geração das respostas**
-
-O LLM receberá a pergunta do usuário e o contexto recuperado, produzindo uma resposta em linguagem natural.
-
-As respostas deverão:
-
-- Utilizar exclusivamente as informações disponíveis nas fontes consultadas.
-- Apresentar os resultados de forma clara e contextualizada.
-- Identificar as fontes utilizadas.
-- Incluir links para as notícias quando aplicável.
-- Informar explicitamente quando não houver evidências suficientes para responder.
-
-### Exemplos de perguntas previstas
-
-**Perguntas sobre a série histórica do PRODES:**
-
-- Qual estado apresentou a maior área desmatada no período analisado?
-- Como evoluiu o desmatamento no Pará entre 2015 e 2025?
-- Quais estados apresentaram aumento ou redução do desmatamento?
-- Qual foi o ano com maior área desmatada na série histórica?
-- Como comparar a evolução do desmatamento entre dois estados?
-
-**Perguntas sobre as notícias da Agência Brasil:**
-
-- Quais são os principais acontecimentos recentes relacionados à Amazônia?
-- Quais notícias abordam ações de combate ao desmatamento?
-- Quais medidas de conservação ambiental foram mencionadas nas matérias?
-- Quais assuntos aparecem com maior frequência nas notícias coletadas?
-
-**Perguntas combinando as duas fontes:**
-
-- As notícias recentes apresentam acontecimentos relacionados aos estados com maiores índices de desmatamento?
-- Quais acontecimentos divulgados pela Agência Brasil ajudam a contextualizar os indicadores do PRODES?
-- Existem notícias relacionadas aos períodos em que foram observadas maiores taxas de desmatamento?
-
-### Controle de qualidade e confiabilidade
-
-Para reduzir respostas incorretas ou informações não sustentadas pelas fontes, serão adotadas as seguintes medidas:
-
-- Separação entre dados oficiais do PRODES e informações complementares provenientes de notícias.
-- Cálculos estatísticos realizados por funções Python, e não estimados pelo LLM.
-- Recuperação de trechos relevantes antes da geração das respostas.
-- Inclusão de referências às fontes utilizadas.
-- Tratamento de perguntas sem evidências suficientes.
-- Distinção entre fatos apresentados nas notícias e interpretações produzidas pelo modelo.
-
-O LLM será utilizado como ferramenta de interpretação e comunicação das informações, não como substituto das fontes oficiais ou dos cálculos estatísticos.
-
-### Escopo e evolução
-
-A funcionalidade de Q&A com LLMs representa uma evolução planejada para o projeto, permitindo ampliar a interação com os dados e transformar o painel em uma ferramenta de consulta contextualizada.
-
-Nesta etapa, o foco está na preparação das fontes, definição da arquitetura e planejamento da integração. A implementação efetiva do mecanismo de recuperação e geração de respostas será realizada em uma etapa posterior.
-
-A funcionalidade não terá como objetivo realizar previsões de desmatamento, estabelecer relações causais entre notícias e indicadores ou substituir análises técnicas e decisões de especialistas.
-
-
-## KPIs descritivos
-
-1. Série temporal por estado e intervalo de anos.  
-
-2. Soma dos valores por estado no recorte, identificada como agregado comparativo.  
-
-3. Valor do ano mais recente por estado.  
-
-4. Variação entre primeiro e último ano, tratando ausências/zeros.  
-
-5. Quantidade de registros, estados e anos disponíveis.  
-
-6. Quantidade de notícias e frequência de palavras. 
-
- 7. Disponibilidade/validade das rotas GET e POST 
-
-
-## Stakeholders
-
-| Stakeholder | Interesse / utilizacao|
-|----------|----------|
-| Analistas ambientais e de sustentabilidade   | Explorar e comparar os dados de desmatamento e as informações contextuais das notícias   |
-| Gestores públicos   | Utilizar os indicadores como apoio à análise e definição de prioridades de monitoramento   |
-| Responsáveis por programas de conservação    | Consultar a evolução territorial e temporal do desmatamento   |
-| Usuários da aplicação    | Aplicar filtros, consultar notícias e complementar os dados por upload de CSV   |
-
-## ODS 13 
-
-O projeto está alinhado ao ODS 13 — Ação Contra a Mudança Global do Clima, ao utilizar dados sobre desmatamento para apoiar a análise de um fenômeno relacionado às mudanças climáticas e à conservação dos ecossistemas.
+**Repositório:** https://github.com/tassiana-bastos/amazon-carbon-ods13

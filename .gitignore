@@ -1,10 +1,22 @@
+
+# Ambientes e arquivos locais
 .venv/
 venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# Segredos
 .env
 .streamlit/secrets.toml
+
+# Modelos locais
+models/
+
+# Memória e dados privados gerados localmente
+data/conversas/
 data/processed/observacoes.jsonl
+
+# Arquivos HTML temporários de scraping
 data/raw/*.html
-models/*
+
